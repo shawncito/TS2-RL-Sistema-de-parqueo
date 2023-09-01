@@ -1,7 +1,7 @@
 import psycopg2
 from datetime import datetime
 
-conn = psycopg2.connect(host='db', dbname='postgres', user='postgres', password='Jexon192005', port=5432)
+conn = psycopg2.connect(host='172.18.0.3', dbname='postgres', user='root', password='root', port=5432)
 
 
 cur = conn.cursor()
