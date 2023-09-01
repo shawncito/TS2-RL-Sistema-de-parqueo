@@ -1,7 +1,8 @@
 import psycopg2
 from datetime import datetime
 
-conn = psycopg2.connect(host='localhost', dbname='postgres', user='postgres', password='Jexon192005', port=5432)
+conn = psycopg2.connect(host='db', dbname='postgres', user='postgres', password='Jexon192005', port=5432)
+
 
 cur = conn.cursor()
 cur.execute('DROP TABLE IF EXISTS vehiculos')
