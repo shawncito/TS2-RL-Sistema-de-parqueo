@@ -38,6 +38,8 @@ print("------REGISTRO DE AUTOS------")
 cur.execute('SELECT * FROM vehiculos')
 for record in cur.fetchall():
     print(record)
+    
+print("hola mundo")
 
 def Actualizar_Registro():
     while True:
