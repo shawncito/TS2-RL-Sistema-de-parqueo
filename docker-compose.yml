@@ -1,39 +1,5 @@
-version: "3.9" # optional since v1.27.0
+version: '3'
 services:
-<<<<<<< Updated upstream
-  postgres:
-      image: postgres:13
-      container_name: postgres
-      restart: always
-      environment:
-        - POSTGRES_USER=root
-        - POSTGRES_PASSWORD=root
-        - POSTGRES_DB=root
-      ports:
-        - 5432:5432
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
-    depends_on:
-      - postgres
-
-
-
-#services:
-#  db:
-#    image: postgres:latest
-#    environment:
-#      POSTGRES_DB: postgres
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: Jexon192005
-=======
   database:
     image: postgres
     ports:
@@ -69,4 +35,3 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: Jexon192005
->>>>>>> Stashed changes

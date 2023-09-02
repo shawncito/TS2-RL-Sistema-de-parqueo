@@ -1,12 +1,7 @@
 import psycopg2
 from datetime import datetime
 
-<<<<<<< Updated upstream
-conn = psycopg2.connect(host='172.18.0.3', dbname='postgres', user='root', password='root', port=5432)
-
-=======
-conn = psycopg2.connect(database='postgres', user='postgres', password='Jexon192005', host='database', port='5432')
->>>>>>> Stashed changes
+conn = psycopg2.connect(database='postgres', user='postgres', password='Jexon192005', host='localhost', port='5432')
 
 cur = conn.cursor()
 cur.execute('DROP TABLE IF EXISTS vehiculos')
@@ -42,8 +37,6 @@ conn.commit()
 cur.execute('SELECT * FROM vehiculos')
 for record in cur.fetchall():
     print(record)
-    
-print("hola mundo")
 
 def Actualizar_Registro():
     while True:
