@@ -1,5 +1,6 @@
 version: "3.9" # optional since v1.27.0
 services:
+<<<<<<< Updated upstream
   postgres:
       image: postgres:13
       container_name: postgres
@@ -32,3 +33,40 @@ services:
 #      POSTGRES_DB: postgres
 #      POSTGRES_USER: postgres
 #      POSTGRES_PASSWORD: Jexon192005
+=======
+  database:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Jexon192005
+      POSTGRES_DB: postgres
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+  main:
+    image: python:3.8
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: 
+      - sh
+      - -c
+      - |
+        pip install psycopg2
+
+    depends_on:
+      - database
+    environment:
+      POSTGRES_HOST: database
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Jexon192005
+>>>>>>> Stashed changes
