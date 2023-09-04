@@ -54,7 +54,7 @@ def reporte():
         print("------Reportes------")
         print("1. Generar Reporte Ganancias")
         print("2. Generar Reporte de Vehículos")
-        print("3. Volver al menú principal")
+        print("3. Salir")
         
         opcion_reporte = int(input("Seleccione una opción: "))
         
