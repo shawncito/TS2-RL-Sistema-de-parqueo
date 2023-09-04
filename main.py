@@ -1,9 +1,11 @@
 import psycopg2
 from datetime import datetime
 
-conn = psycopg2.connect(database='postgres', user='postgres', password='Jexon192005', host='localhost', port='5432')
+conn = psycopg2.connect(database='postgres', user='postgres', password='12345', host='localhost', port='5432')
 
 cur = conn.cursor()
+
+
 cur.execute('DROP TABLE IF EXISTS vehiculos')
 cur.execute('DROP TABLE IF EXISTS registro')
 
@@ -30,13 +32,40 @@ insert_values = [
 cur.executemany('''INSERT INTO vehiculos (Placa, Modelo, Color, Nombre, Apellido, Hora)
                 VALUES (%s, %s, %s, %s, %s, %s)''', insert_values)
 
-
 conn.commit()
 
 
-cur.execute('SELECT * FROM vehiculos')
-for record in cur.fetchall():
-    print(record)
+def generar_reporte_ganancias():
+    cur.execute("SELECT COUNT(*) FROM registro WHERE Estado = 'Salida'")
+    total_entradas = cur.fetchone()[0]
+    ganancias = total_entradas * 5
+    print(f"Ganancias totales hasta la fecha: ${ganancias:.2f}")
+
+def generar_reporte_vehiculos():
+    cur.execute("SELECT Modelo, COUNT(*) FROM vehiculos GROUP BY Modelo")
+    print("Reporte de Vehículos:")
+    for row in cur.fetchall():
+        modelo, cantidad = row
+        print(f"{modelo}: {cantidad}")
+    
+
+def reporte():
+    while True:
+        print("------Reportes------")
+        print("1. Generar Reporte Ganancias")
+        print("2. Generar Reporte de Vehículos")
+        print("3. Volver al menú principal")
+        
+        opcion_reporte = int(input("Seleccione una opción: "))
+        
+        if opcion_reporte == 1:
+            generar_reporte_ganancias()
+        elif opcion_reporte == 2:
+            generar_reporte_vehiculos()
+        elif opcion_reporte == 3:
+            break
+        else:
+            print("Opción no válida. Intente de nuevo.")
 
 def Actualizar_Registro():
     while True:
@@ -45,7 +74,8 @@ def Actualizar_Registro():
                         1. Registrar entrada
                         2. Registrar salida
                         3. Historial
-                        4. Salir
+                        4. Repotes de ganancias
+                        5. Salir
                         '''))
         if Opcion == 1:
             Estado = "Entrada"
@@ -91,7 +121,8 @@ def Actualizar_Registro():
             cur.execute('SELECT * FROM registro')
             for record in cur.fetchall():
                 print(record)
-
+        elif Opcion == 4:
+            reporte()
         else:
             print("Hasta pronto")
             break
